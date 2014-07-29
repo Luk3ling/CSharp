@@ -1,0 +1,83 @@
+using UnityEngine;
+using System.Collections;
+
+public class reticleToMouse : MonoBehaviour {
+	
+	//Public Vars
+	public float rotarySpeed;
+	private bool[] weaponArray = new bool[4];
+	public GameObject[] weaponReticle = new GameObject[4];
+	private int index;
+	private GameObject weaponPick;
+	private Vector3[] oldEuler = new Vector3[4];
+//	private float[] saveY = new float[4];
+//	private Vector3 reticleOne;
+//	private Vector3 reticleTwo;
+//	private Vector3 reticleThree;
+//	private Vector3 reticleFour;
+
+	void FixedUpdate() {
+		weaponPick = weaponReticle[index];
+		// oldEuler[index] = saveY[index];
+				if (Input.GetKey (KeyCode.Alpha1)) {
+						weaponArray [0] = true;
+						weaponArray [1] = false;
+						weaponArray [2] = false;
+						weaponArray [3] = false;
+						index = 0;
+						//weaponPick.transform.rotation = Quaternion.Euler(0, oldEuler[index], 0);////
+						//oldEuler[index] = weaponPick.transform.rotation.y;////
+				} else if (Input.GetKey (KeyCode.Alpha2)) {
+						weaponArray [0] = false;
+						weaponArray [1] = true;
+						weaponArray [2] = false;
+						weaponArray [3] = false;
+						index = 1;
+			//weaponPick.transform.rotation = Quaternion.Euler(0, oldEuler[index], 0);////
+			//oldEuler[index] = weaponPick.transform.rotation.y;////
+				} else if (Input.GetKey (KeyCode.Alpha3)) {
+						weaponArray [0] = false;
+						weaponArray [1] = false;
+						weaponArray [2] = true;
+						weaponArray [3] = false;
+						index = 2;
+			//weaponPick.transform.rotation = Quaternion.Euler(0, oldEuler[index], 0);////
+			//oldEuler[index] = weaponPick.transform.rotation.y;////
+				} else if (Input.GetKey (KeyCode.Alpha4)) {
+						{
+								weaponArray [0] = false;
+								weaponArray [1] = false;
+								weaponArray [2] = false;
+								weaponArray [3] = true;
+								index = 3;
+				//weaponPick.transform.rotation = Quaternion.Euler(0, oldEuler[index], 0);////
+				//oldEuler[index] = weaponPick.transform.rotation.y;////
+						}
+				}
+		}
+		
+		void Update(){	
+
+		if (Input.GetKey (KeyCode.Q)) 
+				{
+				Vector3 newRotation = transform.rotation.eulerAngles;
+				newRotation.y += rotarySpeed;
+				weaponPick.transform.rotation = Quaternion.Euler (newRotation);
+				oldEuler[index] = newRotation;////
+				
+				return;
+				} 
+			else if (Input.GetKey (KeyCode.E)) 
+					{
+					Vector3 newRotation = transform.rotation.eulerAngles;
+					newRotation.y -= rotarySpeed;
+					weaponPick.transform.rotation = Quaternion.Euler (newRotation);
+					oldEuler[index] = newRotation;////
+					return;
+
+					}
+
+
+		}
+
+	}
