@@ -1,0 +1,67 @@
+using UnityEngine;
+using System.Collections;
+
+public class reticleToMouse : MonoBehaviour {
+	
+	//Public Vars
+	public float rotarySpeed;
+	private bool[] weaponArray = new bool[4];
+	public GameObject[] weaponReticle = new GameObject[4];
+	private int weaponFind;
+	private GameObject weaponPick;
+
+	void FixedUpdate() {
+		weaponPick = weaponReticle[weaponFind];
+				if (Input.GetKey (KeyCode.Alpha1)) {
+						weaponArray [0] = true;
+						weaponArray [1] = false;
+						weaponArray [2] = false;
+						weaponArray [3] = false;
+						weaponFind = 0;
+				} else if (Input.GetKey (KeyCode.Alpha2)) {
+						weaponArray [0] = false;
+						weaponArray [1] = true;
+						weaponArray [2] = false;
+						weaponArray [3] = false;
+						weaponFind = 1;
+				} else if (Input.GetKey (KeyCode.Alpha3)) {
+						weaponArray [0] = false;
+						weaponArray [1] = false;
+						weaponArray [2] = true;
+						weaponArray [3] = false;
+						weaponFind = 2;
+				} else if (Input.GetKey (KeyCode.Alpha4)) {
+						{
+								weaponArray [0] = false;
+								weaponArray [1] = false;
+								weaponArray [2] = false;
+								weaponArray [3] = true;
+								weaponFind = 3;
+						}
+				}
+		}
+		
+		void Update(){	
+
+		if (Input.GetKey (KeyCode.Q)) 
+		{
+			Vector3 newRotation = transform.rotation.eulerAngles;
+				newRotation.y += rotarySpeed;
+				weaponPick.transform.rotation = Quaternion.Euler (newRotation);
+				return;
+				} 
+			else if (Input.GetKey (KeyCode.E)) 
+				{
+				Vector3 newRotation = transform.rotation.eulerAngles;
+				newRotation.y -= rotarySpeed;
+				weaponPick.transform.rotation = Quaternion.Euler (newRotation);
+				return;
+
+				}
+
+
+		}
+
+	}
+/*
+ */
